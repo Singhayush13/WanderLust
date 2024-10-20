@@ -1,0 +1,141 @@
+<nav class="navbar navbar-expand-md py-3" style="background-color: #ffffff; border-bottom: 1px solid #dee2e6; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); z-index: 1030; position: relative; transition: background-color 0.3s, box-shadow 0.3s;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="color: #343a40; font-weight: 600;">
+            <i class="fa-solid fa-bomb"></i>
+        </a>
+  
+        <!-- Hamburger Button for Collapsing the Navbar -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <!-- Navbar Items -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/listings" style="padding: 10px 15px; color: #495057; font-weight: 500;">Explore</a>
+                <a class="nav-link" href="/listings/new" style="padding: 10px 15px; color: #495057; font-weight: 500;">Add New Listing</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <% if(!currUser) { %>
+                <a class="nav-link" href="/signup" style="padding: 10px 15px; color: #495057; font-weight: 500;">Sign up</a>
+                <a class="nav-link" href="/login" style="padding: 10px 15px; color: #495057; font-weight: 500;">Log In</a>
+                <% } %>
+                <% if(currUser) { %>
+                <a class="nav-link" href="/logout" style="padding: 10px 15px; color: #495057; font-weight: 500;">Logout</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+  </nav>
+  
+  <style>
+    /* General Navbar Styling */
+    .navbar {
+        position: relative;
+        z-index: 1030;
+    }
+  
+    .navbar:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  
+    /* Nav Links Hover & Tap Effect */
+    .nav-link {
+        position: relative;
+        transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        padding: 10px 20px;
+        border-radius: 4px;
+    }
+  
+    .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 123, 255, 0.1);
+        z-index: -1;
+        transition: transform 0.3s ease-in-out;
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+  
+    .nav-link:hover::before {
+        transform: scaleX(1);
+    }
+  
+    .nav-link:hover {
+        color: #007bff !important;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+    }
+  
+    /* Mobile Menu Styling */
+    @media (max-width: 768px) {
+        .navbar {
+            background-color: #ffffff;
+            z-index: 1030;
+        }
+  
+        .nav-link {
+            text-align: center;
+            padding: 15px 10px;
+            width: 100%;
+            border-bottom: 1px solid #dee2e6;
+        }
+  
+        .navbar-toggler {
+            border: none;
+            padding: 0;
+        }
+  
+        .navbar-toggler-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/b2/Hamburger_icon.svg');
+            background-size: cover;
+            width: 30px;
+            height: 30px;
+        }
+  
+        .navbar-collapse {
+            background-color: #ffffff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+    }
+  
+    /* Smooth Collapse Transition */
+    .collapse.show {
+        transition: height 0.5s ease;
+    }
+  
+    /* Close Button (Cross) Styling */
+    .close-toggler {
+        display: none;
+    }
+  
+    .navbar-toggler.collapsed .navbar-toggler-icon {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/2d/Close_icon.svg');
+        background-size: cover;
+    }
+  </style>
+  
+  <script>
+    // Toggle the hamburger and cross icon based on collapse state
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+  
+    navbarToggler.addEventListener('click', function () {
+        setTimeout(() => {
+            if (navbarCollapse.classList.contains('show')) {
+                navbarToggler.classList.remove('collapsed');
+            } else {
+                navbarToggler.classList.add('collapsed');
+            }
+        }, 100);
+    });
+  </script>
+  

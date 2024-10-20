@@ -1,0 +1,151 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    flex: 1;
+}
+
+/* Navbar Styling */
+.navbar {
+    height: 5rem;
+    background-color: aliceblue;
+}
+
+/* Icon Styling */
+.fa-bomb {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+/* Link Styling */
+.nav-link, .f-info-links a {
+    color: #222222 !important;
+    text-decoration: none;
+}
+.f-info-links a:hover {
+    color: #222222;
+}
+
+/* Footer Section Styling */
+.f-info-socials, .f-info-links, .f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 1.8rem;
+    margin-left: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    display: flex;
+    height: 8rem;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Cards */
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* NewPage */
+
+.add-btn{
+    background-color:#fe424d !important;
+    border: none !important;
+    margin-bottom: 2rem !important;
+}
+
+/* Edit page */
+
+.edit-btn{
+    background-color:#fe424d !important;
+    border: none !important;
+    margin-bottom: 2rem !important;
+}
+
+/* Show Page */
+
+/* custom.css */
+.card-img-top {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-danger {
+    background-color: #fe424d;
+    border-color: #fe424d;
+}
+
+.btn-danger:hover {
+    background-color: #e03e46;
+    border-color: #e03e46;
+}
+
+/* Card and Container Enhancements */
+.card {
+    border-radius: 8px;
+}
+
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}   
+
+.text-center {
+    margin-top: 20px;
+}

@@ -1,0 +1,125 @@
+<% layout("/layout/boilerplate") %>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <% if (success.length > 0) { %>
+                <div class="alert alert-success"><%= success.join(', ') %></div>
+            <% } %>
+            <% if (error.length > 0) { %>
+                <div class="alert alert-danger"><%= error.join(', ') %></div>
+            <% } %>
+
+            <!-- Title Section -->
+            <h3 class="text-center mb-4 font-weight-bold"><%= listing.title %></h3>
+
+            <!-- Image Section -->
+            <div class="card mb-4 Listing-card">
+                <img src="<%= listing.image.url %>" alt="Listing Image" class="card-img-top rounded"
+                     style="object-fit: contain; height: auto; width: 100%; max-height: 500px;">
+            </div>
+
+            <!-- Details Section -->
+            <div class="card border-light mb-4">
+                <div class="card-body">
+                    <p><b>Owned by <i><%= listing.owner.username %></i></b></p>
+                    <p class="card-text mb-3 text-muted"><%= listing.description %></p>
+                    <ul class="list-unstyled mb-4">
+                        <li><strong class="text-dark">Price:</strong> &#8377; <%= listing.price.toLocaleString("en-IN") %></li>
+                        <li><strong class="text-dark">Location:</strong> <%= listing.location %></li>
+                        <li><strong class="text-dark">Country:</strong> <%= listing.country %></li>
+                    </ul>
+                    <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+                        <div class="text-center">
+                            <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary px-4 py-2">Edit This Listing</a>
+                            <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline">
+                                <button type="submit" class="btn btn-danger px-4 py-2 ml-2">Delete This Listing</button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 offset-md-2">
+        <hr>
+        <% if (currUser) { %>
+            <h4>Leave A Review</h4>
+            <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation mb-4">
+                <fieldset class="starability-coinFlip mb-3">
+                    <h6>Rating:</h6>
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible"></label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good"></label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average"></label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good"></label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing"></label>
+                </fieldset>
+
+                <div class="mb-3 mt-3">
+                    <label for="comment" class="form-label">Comments</label>
+                    <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+                    <div class="invalid-feedback">Please Add Some Reviews</div>
+                </div>
+                <button class="btn btn-outline-dark">Submit</button>
+            </form>
+        <% } %>
+
+        <h4><b>All Reviews</b></h4>
+        <div class="row">
+            <% for (let review of listing.reviews) { %>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm"> <!-- Improved card appearance -->
+                        <div class="card-body p-3"> <!-- Added padding -->
+                            <h5 class="card-title">@<%= review.author.username %></h5>
+                            <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+                            <p class="card-text"><%= review.comment %></p>
+                            <% if (currUser && review.author._id.equals(currUser._id)) { %>
+                                <form class="mb-3" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom Styles */
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .starability-coinFlip input {
+        display: none; /* Hide radio buttons */
+    }
+
+    .starability-coinFlip label {
+        font-size: 24px; /* Increase star size */
+        color: #ccc; /* Default star color */
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .starability-coinFlip input:checked ~ label {
+        color: #f39c12; /* Selected star color */
+    }
+
+    .shadow-sm {
+        padding: 15px; /* Increased padding for review cards */
+    }
+</style>
